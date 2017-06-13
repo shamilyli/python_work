@@ -1,0 +1,1 @@
+using GNU scale down the image from ship to ship3
