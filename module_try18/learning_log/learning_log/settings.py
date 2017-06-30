@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #others apps
+    'bootstrap3',
+    #my apps
     'learning_logs',
     'users',
 ]
@@ -123,3 +126,28 @@ STATIC_URL = '/static/'
 
 #my setting
 LOGIN_URL = '/users/login/'
+
+#django-bootstrap3 setting
+BOOTSTRAP3={
+    'include_jquery':True,
+}
+
+#setting for Heroku
+if os.getcwd() == '/app':
+    import dj_database_url
+    DATABASES = {
+    'default': dj_database_url.config(default='postgres://localhost')
+    }
+    #let request.is_secure() admiting for the head of X-Forwarded-Proto
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    #supporting all the host header
+    ALLOWED_HOSTS = ['*']
+
+    #static distribute the source
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+
+
